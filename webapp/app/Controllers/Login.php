@@ -26,6 +26,8 @@ class Login extends BaseController
         }
 
         log_message('debug', 'ログイン認証に成功しました id:{id}', ['id' => $id]);
+        session_regenerate_id();
+
         $session = session(); // セッションを取得
         $session->set('userId', $id);
         $session->set('isLogin', true);
