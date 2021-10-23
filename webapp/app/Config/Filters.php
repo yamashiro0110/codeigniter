@@ -7,6 +7,7 @@ use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
 use App\Filters\Authentication;
+use App\Filters\SaveRequest;
 
 class Filters extends BaseConfig
 {
@@ -21,6 +22,7 @@ class Filters extends BaseConfig
         'toolbar'  => DebugToolbar::class,
         'honeypot' => Honeypot::class,
         'auth' => Authentication::class,
+        'saveRequest' => SaveRequest::class,
     ];
 
     /**
@@ -33,6 +35,7 @@ class Filters extends BaseConfig
         'before' => [
             // 'honeypot',
             'csrf',
+            'saveRequest',
         ],
         'after' => [
             'toolbar',
