@@ -13,7 +13,7 @@ class Authentication implements FilterInterface
         $isLogin = session('isLogin');
 
         if ($isLogin === true) {
-            log_message('debug', 'ログイン済みユーザーです id:{}', ['id' => session('id')]);
+            log_message('debug', 'ログイン済みユーザーです id:{id}', ['id' => session('userId')]);
             return;
         }
 
