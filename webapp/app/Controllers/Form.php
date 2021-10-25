@@ -3,10 +3,11 @@
 namespace App\Controllers;
 
 use CodeIgniter\View\Parser;
+use App\Helpers\ControllerHelper;
 
 class Form extends BaseController
 {
-    use ControllerSupport;
+    use ControllerHelper;
 
     public function index()
     {
@@ -18,7 +19,7 @@ class Form extends BaseController
     public function post()
     {
         $parser = $this->parser();
-        $data['value'] = $this->request->getVar('value');
+        $data['value'] = $this->requestParam('value');
         echo $parser->render('template/header');
         echo $parser->setData($data)->render('form/result');
         echo $parser->render('template/footer');
