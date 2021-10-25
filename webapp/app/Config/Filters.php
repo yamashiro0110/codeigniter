@@ -8,6 +8,7 @@ use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
 use App\Filters\Authentication;
 use App\Filters\SaveRequest;
+use App\Filters\Session;
 
 class Filters extends BaseConfig
 {
@@ -23,6 +24,7 @@ class Filters extends BaseConfig
         'honeypot' => Honeypot::class,
         'auth' => Authentication::class,
         'saveRequest' => SaveRequest::class,
+        'session' => Session::class,
     ];
 
     /**
@@ -35,7 +37,8 @@ class Filters extends BaseConfig
         'before' => [
             // 'honeypot',
             'csrf',
-            'saveRequest',
+            'session' => ['except' => ['/health']],
+            'saveRequest' => ['except' => ['/login']],
         ],
         'after' => [
             'toolbar',
