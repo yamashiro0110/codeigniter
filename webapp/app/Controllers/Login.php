@@ -2,8 +2,13 @@
 
 namespace App\Controllers;
 
+use App\Helpers\LoginSessionHelper;
+use App\Helpers\ControllerHelper;
+
 class Login extends BaseController
 {
+    use LoginSessionHelper, ControllerHelper;
+
     public function index()
     {
         echo view('template/header');
@@ -14,8 +19,8 @@ class Login extends BaseController
     public function login()
     {
         # リクエストパラメータを取得
-        $id = $this->request->getVar('id');
-        $password = $this->request->getVar('password');
+        $id = $this->requestParam('id');
+        $password = $this->requestParam('password');
 
         if ($id !== 'yamashiro0110' || $password !== 'test') {
             log_message('debug', 'ログイン認証に失敗しました');
@@ -26,12 +31,16 @@ class Login extends BaseController
         }
 
         log_message('debug', 'ログイン認証に成功しました id:{id}', ['id' => $id]);
-        session_regenerate_id();
 
+        session_regenerate_id();
         $session = session(); // セッションを取得
         $session->set('userId', $id);
         $session->set('isLogin', true);
-        return redirect()->redirect('/account');
+
+        $uri = $this->retrieveLoginAfterUri();
+        log_message('debug', 'ログイン後のURIにリダイレクトします uri:{uri}', ['uri' => $uri]);
+
+        return redirect()->redirect($uri);
     }
 
     public function logout()
