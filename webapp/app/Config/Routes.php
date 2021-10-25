@@ -36,6 +36,8 @@ $routes->get('/login', 'Login::index');
 $routes->post('/login', 'Login::login');
 $routes->get('/logout', 'Login::logout');
 $routes->get('/account', 'Account::index');
+$routes->get('/form', 'Form::index');
+$routes->post('/form', 'Form::post');
 
 /*
  * --------------------------------------------------------------------
